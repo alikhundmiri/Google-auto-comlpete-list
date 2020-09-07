@@ -3,6 +3,5 @@
 
 # But not these files...
 !.gitignore
-!script.pl
-!template.latex
+!get-auto-complete.py
 # etc...
