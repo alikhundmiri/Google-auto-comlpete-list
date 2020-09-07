@@ -84,7 +84,7 @@ def get_keywords(string):
 
 
 if __name__ == '__main__':
-	string = "Covid test hyderabad"
+	string = "Startup developers"
 	file_name = create_doc_file(string)
 
 	main(string, file_name)
