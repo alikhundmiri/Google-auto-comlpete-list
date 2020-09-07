@@ -3,8 +3,8 @@
 
 # But not these files...
 !.gitignore
-!get-auto-complete.py			
+!get-auto-complete.py
 !work-from-home_07-09-2020.txt
-!Startup-developers_07-09-2020.txt	
+!Startup-developers_07-09-2020.txt
 !twitter-marketing_07-09-2020.txt
 # etc...
