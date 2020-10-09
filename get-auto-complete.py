@@ -1,4 +1,3 @@
-
 import time
 import requests
 import urllib.parse
@@ -10,14 +9,22 @@ keyword_list = []
 
 base_url = 'http://suggestqueries.google.com/complete/search?&output=toolbar&gl=us&hl=en&q='
 
+# Updates
+# 1. folder name for keyword
+# 2. child folder for date
+# 3. file for all keywords
+# 4. CSV file for common keywords 
+# 5. eliminate keywords with "tools" "hubspot" "jobs"
+# 6. sort by search volume and keyword density
+
+
 def create_doc_file(string):
 	print('creating file')
-	# get date
+	
 	date_today = datetime.now().strftime("%d-%m-%Y")
-	# add it to the string.
 	file_name = (string + "_" + date_today).replace(' ', '-')+".txt"
-
 	file = open(file_name, 'w+')
+
 	print('created {}'.format(file_name))
 	file.close()
 	return file_name
@@ -84,22 +91,7 @@ def get_keywords(string):
 
 
 if __name__ == '__main__':
-	string = "Startup developers"
+	string = "How to generate leads"
 	file_name = create_doc_file(string)
 
 	main(string, file_name)
-
-
-
-
-# start
-
-# create file = date+keyword
-
-# take keyword
-# convert to url encoded
-# search url
-# grab all results
-# add to file
-
-
