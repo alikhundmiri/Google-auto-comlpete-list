@@ -1,5 +1,17 @@
 # Keyword Auto Complete
 
+## what it does
+
+Gives you a list of suggested keywords
+
+## Sample keywords
+
+[Startup Developer](/Startup-developers_07-09-2020.txt)
+[Twitter marketing](/twitter-marketing_07-09-2020.txt)
+[Work from home](/work-from-home_07-09-2020.txt)
+
+
+
 ## Current version
 
 1. create file = date+keyword
