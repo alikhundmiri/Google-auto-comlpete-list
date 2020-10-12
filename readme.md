@@ -1,15 +1,17 @@
 # Keyword Auto Complete
 
-## what it does
+## What It Does
 
 Gives you a list of suggested keywords
 
 ## Get Your List of Keywords
 
-There are three sample keywords which you find below. If you want a similar list, you can check out [this google form](https://forms.gle/AwgnbB4FQNL3933j9), and I will email the list to you.
+If you want a similar list for your Keyword, you can check out [this google form](https://forms.gle/AwgnbB4FQNL3933j9), and I will email the list to you.
 
 
-## Sample keywords
+There are three sample keywords which you find below.
+
+## Sample Keywords
 
 [Startup Developer](/Startup-developers_07-09-2020.txt) (68 Suggestions)
 
@@ -20,7 +22,7 @@ There are three sample keywords which you find below. If you want a similar list
 _Updated: 7th september 2020_
 
 
-## Future version
+## Future Version
 
 1. Downloadable CSV file 
 2. sort keywords by search volume
