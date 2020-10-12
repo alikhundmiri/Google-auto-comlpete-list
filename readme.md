@@ -6,9 +6,11 @@ Gives you a list of suggested keywords
 
 ## Sample keywords
 
-[Startup Developer](/Startup-developers_07-09-2020.txt)
-[Twitter marketing](/twitter-marketing_07-09-2020.txt)
-[Work from home](/work-from-home_07-09-2020.txt)
+[Startup Developer](/Startup-developers_07-09-2020.txt) _7th september 2020_ (68 Suggestions)
+
+[Twitter marketing](/twitter-marketing_07-09-2020.txt)_7th september 2020_ (222 Suggestions)
+
+[Work from home](/work-from-home_07-09-2020.txt)_7th september 2020_ (476 Suggestions)
 
 
 
