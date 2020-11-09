@@ -1,3 +1,4 @@
+import sys
 import time
 import requests
 import urllib.parse
@@ -63,11 +64,12 @@ def get_keywords(search_engine, string):
 	# encoded_url = base_url + encoded_string
 		
 	# NEW CODE
+	base_url = 'http://suggestqueries.google.com/complete/search'
+
 	search_dictionary = {
 	'output':'toolbar',
 	'gl': 'in',
 	'hl': 'en',
-	'ds': 'yt',
 	'q' : string,
 	}
 	
@@ -102,41 +104,61 @@ def get_keywords(search_engine, string):
 
 	# record all suggestions	
 	keywords=[]
-
+	this_keyword = 0
 	for suggestion_ in suggestions.iter('suggestion'):
 		# count how many keywords found
 		global keyword_found
 		keyword_found = keyword_found + 1
 		keyword = suggestion_.attrib.get('data')
 		keywords.append(keyword)
-		
+		this_keyword = this_keyword + 1
+
 		# print(type(suggestion_.attrib.value()))
 	return keywords
 
 def main(search_engine, string, file_name, LONGSEARCH):
 	# initial string
+	print("---{}---".format(string), end="")
+	sys.stdout.flush()	
+
 	keywords = get_keywords(search_engine, string)
 	if keywords is not None: write(keywords, file_name)
+	print("DONE")
 
 	for i in range(ord('A'), ord('Z') + 1):
-		print('---{}---'.format(chr(i)))
+		print("---{}---".format(chr(i)),end = "")
+		sys.stdout.flush()
 		# prefixed alphabet
 		string_search(file_name, search_engine, chr(i)+" "+string)
 		if LONGSEARCH: string_search(file_name, search_engine, chr(i)+chr(i)+" "+string)
 
 		# postfixed alphabet
 		string_search(file_name, search_engine, string+" "+chr(i))
-		if LONGSEARCH: string_search(file_name, search_engine, string+" "+chr(i)+chr(i))	
+		if LONGSEARCH: string_search(file_name, search_engine, string+" "+chr(i)+chr(i))
+		
+		print("DONE")
 
 	print("---REPORT---")
 	print('found {} keywords by searching {} keywords on {}\n'.format(keyword_found, keyword_searched, search_engine))
 
 
 if __name__ == '__main__':
-	string = "leads"
+	string = "Youtube API"
 	search_engine = "google"
 	LONGSEARCH = True
 	file_name = create_doc_file(search_engine, string, LONGSEARCH)
 	main(search_engine, string, file_name, LONGSEARCH)
+	
 
+# 	print("Creating folders... ", end="")
+# 	sys.stdout.flush()
+# 	time.sleep(2) # fake process
+# 	print("DONE")
+
+# 	time.sleep(1)
+	
+# 	print("Creating files... ", end="")
+# 	sys.stdout.flush()
+# 	time.sleep(2) # fake process
+# 	print("DONE")
 # Add progress bar using: https://stackoverflow.com/questions/3173320/text-progress-bar-in-the-console
