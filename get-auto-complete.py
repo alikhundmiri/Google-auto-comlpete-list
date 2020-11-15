@@ -5,6 +5,8 @@ import urllib.parse
 from datetime import datetime
 from urllib.parse import urlencode
 import xml.etree.ElementTree as ET
+from collections import OrderedDict
+
 
 keyword_list = []
 
@@ -67,7 +69,8 @@ def string_search(file_name, search, string):
 def get_keywords(search_engine, string):
 	# print("parsing {} now".format(string))
 
-	time.sleep(1)
+	
+	# time.sleep(1)
 
 	# OLD CODE
 	# encord the string
@@ -152,12 +155,51 @@ def main(search_engine, string, file_name, LONGSEARCH):
 	print('Found {} keywords by searching {} keywords on {}\n'.format(keyword_found, keyword_searched, search_engine))
 
 
+def common_keywords(file_name, string):
+	
+	# list of new keywords
+	with open(file_name,"r") as f:
+		keywords = f.readlines()
+	keywords = [x.strip() for x in keywords]
+	
+
+	# original keyword, string. Split by words
+	string_words = string.lower().split()
+	# stop_words = ['on','of','the','if','it','a','an']
+	
+	print("\n-------Word Repeating Frequently-------\n")
+
+
+	
+	print('cleaning keywords... ', end = "")
+	sys.stdout.flush()
+
+	sublist = []
+	# This nested for loop is very complex. it turns keyword from ['this is a keyword'] to ['this','is','a','keyword']. 
+	# and then it gives is [['this','is','a','keyword'],['those','are','also','keywords']]
+	# and then if each of those sub keywords have any words from base keywords it excludes them from the new keyword list
+	cleaned_keywords = [item for sublist in [keyword.split() for keyword in keywords] for item in sublist if item not in string_words]
+	
+	
+	repeat_words = {i:cleaned_keywords.count(i) for i in cleaned_keywords}
+	repeat_words = OrderedDict(sorted(repeat_words.viewitems(), key=lambda x: len(x[1])))
+
+	print('DONE')
+
+	for key, value in sorted (key_value.values()):
+		print('{}\t{}'.format(value, key))
+
+	print("\n--------------------------------------\n")
+	F202 16-4-293 SSKPlaza Chanchalguda
 if __name__ == '__main__':
-	string = "Hyderabadi Food"
+	string = "How to win accounts"
 	search_engine = "google"
 	LONGSEARCH = True
-	file_name = create_doc_file(search_engine, string, LONGSEARCH)
-	main(search_engine, string, file_name, LONGSEARCH)
+	# file_name = create_doc_file(search_engine, string, LONGSEARCH)
+	# main(search_engine, string, file_name, LONGSEARCH)
+
+	file_name = 'google/how-to-win-accounts_13-10-2020.txt'
+	common_keywords(file_name, string)
 	
 
 # 	print("Creating folders... ", end="")
