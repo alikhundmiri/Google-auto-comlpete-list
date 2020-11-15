@@ -102,39 +102,45 @@
 <body>
 	<div class="cover-container d-flex p-3 mx-auto flex-column">
 		<main role="main" class="inner cover">
-			<span><i>28 October 2020</i></span>
-			<h1 class="cover-heading">Copywrite Text Editor</h1>
+			<!-- <h1 class="cover-heading">Copywrite Text Editor</h1> -->
 			<div>
-				<div class="row header-line">Enter the keyword</div>
+				<!-- <div class="row header-line">Enter the keyword</div> -->
 				<!-- onsubmit="return validateForm()" -->
-				<div class="custom-form">
+				<!-- <div class="custom-form">
 					<form id="keyword-form">
-						<label>
-							Seed Keyword: <input id="id_keyword" type="text" name="keyword">
-						</label>
-						<button class="btn btn-primary" type="submit">Find Longtail</button>
-						<div id ="form_errors" style="color: red; font-size: 1rem"></div>
+						
+							<input id="id_keyword" type="text" name="keyword">
+
+							<button class="btn btn-primary" type="submit">Find Longtail</button>
+							<div id ="form_errors" style="color: red; font-size: 1rem"></div>
+						
 					</form>
-				</div>
+				</div> -->
 			</div>
 			<div>
 				<!-- <div class="row header-line">Keywords Generated</div> -->
 				<div class="row">
 					<div class="col-3 keyword-col">
-						<div class="row header-line">Keywords Generated</div>
+						<div class="row header-line">Keywords</div>
 
+						<div class="row">
+							<form id="keyword-form">
+
+								<input id="id_keyword" type="text" name="keyword">
+
+								<button class="btn btn-primary" type="submit">Find Longtail</button>
+								<div id ="form_errors" style="color: red; font-size: 1rem"></div>
+
+							</form>
+						</div>
 						<div class="row" id="list-of-keywords">
-							<div class="keyword-div col-12">
-								<p style="float: left">KEYWORD</p>
-								<a style="float: right" value='Gold is not real' onclick="return addH2(this)" href="">Add</a>
-							</div>
 							
 						</div>
 					</div>
 					<div class="col-9 textarea-col">
 						<div class="row header-line">Editor</div>
 
-						<textarea class="article-editor">What you see is what you get</textarea>
+						<textarea id='article-editor' class="article-editor">What you see is what you get</textarea>
 					</div>
 				</div>
 			</div>
@@ -224,9 +230,14 @@
 
 		function addH2(event) {
 			var targ = event.getAttribute('value');
-			alert(targ);
-			return false;
 
+			// document.getElementById("article-editor").value += targ;
+			
+			// tinymce.get('.article-editor').getBody().innerHTML = `<h2>${targ}</h2>`;
+			tinymce.editors[0].getBody().innerHTML += `<h2>${targ}</h2>`;
+
+			console.log(targ);
+			return false;
 		}
 		
 	</script>
