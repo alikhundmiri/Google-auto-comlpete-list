@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+	<!-- Primary Meta Tags -->
+	<title>Keyword Auto generator</title>
+	<meta name="title" content="Keyword Auto generator">
+	<meta name="description" content="DESCRIPTION">
+
+	<!-- Open Graph / Facebook -->
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://www.alicodermaker.com/">
+	<meta property="og:title" content="Keyword Auto generator">
+	<meta property="og:description" content="DESCRIPTION">
+	<!-- <meta property="og:image" content="https://www.AliCoderMaker.com/images/AliCoderMaker.png"> -->
+
+	<!-- Twitter -->
+	<meta property="twitter:card" content="summary_large_image">
+	<meta property="twitter:url" content="https://www.alicodermaker.com/">
+	<meta property="twitter:title" content="Keyword Auto generator">
+	<meta property="twitter:description" content="DESCRIPTION">
+	<!-- <meta property="twitter:image" content="https://www.AliCoderMaker.com/images/AliCoderMaker.png"> -->
+	<style>
+		.bd-placeholder-img {
+			font-size: 1.125rem;
+			text-anchor: middle;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+
+		@media (min-width: 768px) {
+			.bd-placeholder-img-lg {
+				font-size: 3.5rem;
+			}
+		}
+		.header-line{
+			text-align: left;
+			font-size: 2rem;
+			font-weight: 200;
+			border-bottom: 0.75px solid currentColor;	
+			margin-bottom: 15px;
+		}
+		.keyword-div{
+			/*background-color: yellow;*/
+		}
+
+		.keyword-col{
+			overflow-y: auto;
+			border-right: 20;
+			padding: 0px 20px 0px 20px;
+			height: 100vh;
+		}
+
+		.textarea-col{
+			border-right: 20px;
+			padding: 0px 20px 0px 20px;
+			height: 100vh;
+
+		}
+
+		textarea{
+			width: 100%;
+			height: 100vh;
+
+		}
+
+		.keyword-div{
+			/*background-color: #ededed;*/
+			transition: 0.4s, ease;
+		}
+		.keyword-div:hover {
+			background-color: #ededed;
+		}
+
+		.keyword-div>p,a {
+			margin-top: 2px;
+			vertical-align: center;
+		}
+	</style>
+
+	<!-- Custom styles for this template -->
+	<!-- <link href="https://www.AliCoderMaker.com/cover.css" rel="stylesheet"> -->
+	<script src="https://AliCoderMaker.com/header.js"></script>
+
+	<!-- TINYMC for text editor -->
+	<script src="https://cdn.tiny.cloud/1/kmd7edgycr8jwaicu6cv4l01uj0ybc91n3qk3ookmb67njed/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+	<script>
+		tinymce.init({
+			selector: '.article-editor'
+		});
+	</script>
+
+</head>
+<body>
+	<div class="cover-container d-flex p-3 mx-auto flex-column">
+		<main role="main" class="inner cover">
+			<span><i>28 October 2020</i></span>
+			<h1 class="cover-heading">Copywrite Text Editor</h1>
+			<div>
+				<div class="row header-line">Enter the keyword</div>
+				<!-- onsubmit="return validateForm()" -->
+				<div class="custom-form">
+					<form id="keyword-form">
+						<label>
+							Seed Keyword: <input id="id_keyword" type="text" name="keyword">
+						</label>
+						<button class="btn btn-primary" type="submit">Find Longtail</button>
+						<div id ="form_errors" style="color: red; font-size: 1rem"></div>
+					</form>
+				</div>
+			</div>
+			<div>
+				<!-- <div class="row header-line">Keywords Generated</div> -->
+				<div class="row">
+					<div class="col-3 keyword-col">
+						<div class="row header-line">Keywords Generated</div>
+
+						<div class="row" id="list-of-keywords">
+							<div class="keyword-div col-12">
+								<p style="float: left">KEYWORD</p>
+								<a style="float: right" value='Gold is not real' onclick="return addH2(this)" href="">Add</a>
+							</div>
+							
+						</div>
+					</div>
+					<div class="col-9 textarea-col">
+						<div class="row header-line">Editor</div>
+
+						<textarea class="article-editor">What you see is what you get</textarea>
+					</div>
+				</div>
+			</div>
+		</main>
+	</div>
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+	<!-- trying this text editor for textaread-->
+	<script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
+
+
+	<!-- The MVP -->
+	<script type="text/javascript">
+		
+
+		/*without jQuery (doesn't work in older IEs)*/
+		var past_keywords = [];
+		function startKeywordFinder(event) {
+
+			/*get the keyword from text field*/
+			var base_keyword = document.getElementById('id_keyword').value;
+
+			/*check if this keyword have been requested in this before*/
+			if (past_keywords.includes(base_keyword)) {
+				alert("you have already searched for " + base_keyword);
+
+			} else {
+				past_keywords.push(base_keyword);
+				const longsearch = false;
+				var i;
+
+				for (var i = 97; i < 123; i++) {
+					keyword_combiner(i, base_keyword, longsearch);
+				};
+				console.log("Finish");
+			};
+			console.log("past_keywords: " + past_keywords)
+			console.log('base_keyword: ' + base_keyword)
+
+			event.preventDefault();
+		};
+
+
+		function keyword_combiner(i, base_keyword, longsearch) {
+			send_api_request(base_keyword + " " + String.fromCharCode(i));
+			send_api_request(String.fromCharCode(i) + " " + base_keyword);
+
+			if (longsearch) {
+				send_api_request(base_keyword + " " + String.fromCharCode(i) + String.fromCharCode(i));
+				send_api_request(String.fromCharCode(i) + String.fromCharCode(i) + " " + base_keyword);
+			}
+		}
+
+		function send_api_request(keyword) {
+			/*Create a <a> node*/
+			
+			/*
+			<div class="keyword-div col-12">
+				<p style="float: left">KEYWORD</p>
+				<a style="float: right" href="">Add</a>
+			</div>
+			*/
+
+			var node = document.createElement("div");
+			node.setAttribute('class','keyword-div col-12');
+
+			node.innerHTML = `<p style="float: left">${keyword}</p> 
+			<a style="float: right" value='${keyword}' onclick="return addH2(this)" href="">Add</a>`;
+
+
+
+			/* Append with id="list-of-keywords" */
+			document.getElementById("list-of-keywords").appendChild(node);
+
+		}
+		// Chekc for form submit. and initiate StartKeywordFinder
+		const form = document.getElementById('keyword-form')
+		form.addEventListener('submit', startKeywordFinder)
+
+		// Function to add H2 texts in textarea. 
+
+
+		function addH2(event) {
+			var targ = event.getAttribute('value');
+			alert(targ);
+			return false;
+
+		}
+		
+	</script>
+	<!-- END of The MVP -->
+
+</body>
+</html>
