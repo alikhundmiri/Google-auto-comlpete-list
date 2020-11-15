@@ -200,34 +200,32 @@
 		}
 
 		function send_api_request(keyword) {
-			/*Create a <a> node*/
-			
-			/*
-			<div class="keyword-div col-12">
-				<p style="float: left">KEYWORD</p>
-				<a style="float: right" href="">Add</a>
-			</div>
-			*/
+			// do the API FETCH HERE
+			// CONVERT XML TO TEXT
+			// RUN A FOR LOOP
+			// FOR ALL NEW KEYWORD: createNewEntry
+			createNewEntry(keyword);
 
+		}
+
+		function createNewEntry(keyword){
+			/*Create a <div> node*/
 			var node = document.createElement("div");
 			node.setAttribute('class','keyword-div col-12');
 
+			// add an innerHTML to the node
 			node.innerHTML = `<p style="float: left">${keyword}</p> 
 			<a style="float: right" value='${keyword}' onclick="return addH2(this)" href="">Add</a>`;
 
-
-
-			/* Append with id="list-of-keywords" */
+			/* Append this node with the list: id="list-of-keywords" */
 			document.getElementById("list-of-keywords").appendChild(node);
-
 		}
 		// Chekc for form submit. and initiate StartKeywordFinder
 		const form = document.getElementById('keyword-form')
 		form.addEventListener('submit', startKeywordFinder)
 
+
 		// Function to add H2 texts in textarea. 
-
-
 		function addH2(event) {
 			var targ = event.getAttribute('value');
 
