@@ -94,7 +94,8 @@
 	<script src="https://cdn.tiny.cloud/1/kmd7edgycr8jwaicu6cv4l01uj0ybc91n3qk3ookmb67njed/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 	<script>
 		tinymce.init({
-			selector: '.article-editor'
+			selector: '.article-editor',
+			placeholder: `Begin by entering a seed keyword and click 'add' for relatable keywords.`
 		});
 	</script>
 
@@ -103,10 +104,9 @@
 	<div class="cover-container d-flex p-3 mx-auto flex-column">
 		<main role="main" class="inner cover">
 			<!-- <h1 class="cover-heading">Copywrite Text Editor</h1> -->
-			<div>
-				<!-- <div class="row header-line">Enter the keyword</div> -->
-				<!-- onsubmit="return validateForm()" -->
-				<!-- <div class="custom-form">
+			<!-- <div>
+				<div class="row header-line">Enter the keyword</div>
+				<div class="custom-form">
 					<form id="keyword-form">
 						
 							<input id="id_keyword" type="text" name="keyword">
@@ -115,8 +115,8 @@
 							<div id ="form_errors" style="color: red; font-size: 1rem"></div>
 						
 					</form>
-				</div> -->
-			</div>
+				</div>
+			</div> -->
 			<div>
 				<!-- <div class="row header-line">Keywords Generated</div> -->
 				<div class="row">
@@ -125,9 +125,7 @@
 
 						<div class="row">
 							<form id="keyword-form">
-
-								<input id="id_keyword" type="text" name="keyword">
-
+								<input id="id_keyword" type="text" name="keyword" placeholder="Enter Seed Keyword">
 								<button class="btn btn-primary" type="submit">Find Longtail</button>
 								<div id ="form_errors" style="color: red; font-size: 1rem"></div>
 
@@ -138,9 +136,9 @@
 						</div>
 					</div>
 					<div class="col-9 textarea-col">
-						<div class="row header-line">Editor</div>
+						<!-- <div class="row header-line">Editor</div> -->
 
-						<textarea id='article-editor' class="article-editor">What you see is what you get</textarea>
+						<textarea id='article-editor' class="article-editor"></textarea>
 					</div>
 				</div>
 			</div>
@@ -149,13 +147,13 @@
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
 	<!-- trying this text editor for textaread-->
 	<script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
-
 
 	<!-- The MVP -->
 	<script type="text/javascript">
@@ -177,13 +175,16 @@
 				const longsearch = false;
 				var i;
 
+				// testing
 				for (var i = 97; i < 123; i++) {
 					keyword_combiner(i, base_keyword, longsearch);
 				};
-				console.log("Finish");
+				// end testing
+				// send_api_request(base_keyword)
+				// console.log("Finish");
 			};
-			console.log("past_keywords: " + past_keywords)
-			console.log('base_keyword: ' + base_keyword)
+			// console.log("past_keywords: " + past_keywords)
+			// console.log('base_keyword: ' + base_keyword)
 
 			event.preventDefault();
 		};
@@ -200,11 +201,30 @@
 		}
 
 		function send_api_request(keyword) {
-			// do the API FETCH HERE
-			// CONVERT XML TO TEXT
-			// RUN A FOR LOOP
-			// FOR ALL NEW KEYWORD: createNewEntry
-			createNewEntry(keyword);
+			// set the base URL
+			let base_url = 'http://suggestqueries.google.com/complete/search?';
+
+			// Start AJAX API Fetch
+			$.ajax({
+				type: 'GET',
+				crossDomain: true,
+				dataType: 'jsonp', // we want jsonp. this will over ride CORS stuff
+				url: base_url,
+				data: {
+					'client':'chrome',
+					'gl':'in',
+					'hl':'en',
+					'q' : keyword,
+				},
+				success: function(jsondata){
+					console.log(jsondata)
+					$.each(jsondata[1], function(key, value) {
+						// console.log(value)
+						createNewEntry(value);
+					})
+					// Add here to catch on fail
+				},
+			});
 
 		}
 
