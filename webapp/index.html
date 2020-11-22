@@ -13,23 +13,26 @@
 
 	<!-- Primary Meta Tags -->
 	<title>Keyword Auto generator</title>
-	<meta name="title" content="Keyword Auto generator">
+	<meta name="title" content="SEO Editor - Write What People Want to Read">
 	<meta name="description" content="Editor to write articles which people are searching for on google">
 
 	<!-- Open Graph / Facebook -->
 	<meta property="og:type" content="website">
-	<meta property="og:url" content="https://www.alicodermaker.com/">
-	<meta property="og:title" content="Keyword Auto generator">
+	<meta property="og:url" content="https://www.alicodermaker.com/editor">
+	<meta property="og:title" content="SEO Editor - Write What People Want to Read">
 	<meta property="og:description" content="Editor to write articles which people are searching for on google">
 	<!-- <meta property="og:image" content="https://www.AliCoderMaker.com/images/AliCoderMaker.png"> -->
 
 	<!-- Twitter -->
 	<meta property="twitter:card" content="summary_large_image">
 	<meta property="twitter:url" content="https://www.alicodermaker.com/">
-	<meta property="twitter:title" content="Keyword Auto generator">
+	<meta property="twitter:title" content="SEO Editor - Write What People Want to Read">
 	<meta property="twitter:description" content="Editor to write articles which people are searching for on google">
 	<!-- <meta property="twitter:image" content="https://www.AliCoderMaker.com/images/AliCoderMaker.png"> -->
 	<style>
+		/*this disables the scrolling effect */
+		html, body {margin: 0; height: 100%; overflow: hidden}
+
 		.bd-placeholder-img {
 			font-size: 1.125rem;
 			text-anchor: middle;
@@ -57,14 +60,14 @@
 
 		.keyword-col{
 			overflow-y: auto;
-			border-right: 20;
+			border-right: 10px;
 			padding: 0px 20px 0px 20px;
 			height: 100vh;
 		}
 
 		.textarea-col{
 			border-right: 20px;
-			padding: 0px 20px 0px 20px;
+			padding: 0px 20px 0px 10px;
 			height: 100vh;
 
 		}
@@ -124,16 +127,32 @@
 				<!-- <div class="row header-line">Keywords Generated</div> -->
 				<div class="row">
 					<div class="col-3 keyword-col">
-						<div class="row header-line">Keywords</div>
+						<div class="sticky-top row" style="background-color: white">
+							<div class="col">
+								
+								<div class="row header-line">SEO Editor</div>
 
-						<div class="row">
-							<form id="keyword-form">
-								<input id="id_keyword" type="text" name="keyword" value='python vs javascript' placeholder="Enter Seed Keyword">
-								<button class="btn btn-primary" type="submit">Find Longtail</button>
-								<div id ="form_errors" style="color: red; font-size: 1rem"></div>
+								<div class="row">
+									<form style="width: 100%" id="keyword-form">
+										<div class="input-group mb-3">
 
-							</form>
+											<input autocomplete="off" class="form-control" id="id_keyword" type="text" name="keyword" placeholder="Enter Seed Keyword" aria-label="Seed Keywords" aria-describedby="basic-addon2">
+
+											<div class="input-group-append">
+
+												<button class="btn btn-outline-secondary" type="submit">Find Longtail</button>
+
+											</div>
+										</div>
+
+										<div id ="form_errors" style="color: red; font-size: 1rem"></div>
+
+									</form>
+
+								</div>
+							</div>
 						</div>
+
 						<div class="row">
 							
 							<table class="table table-borderless" id="list-of-keywords">
@@ -172,9 +191,19 @@
 
 	<!-- The MVP -->
 	<script type="text/javascript">
-		$(document).ready( function () {
-			$('#list-of-keywords').DataTable();
-		});
+		
+		/*
+		TODO
+		1. Add 'clear button' to remove all keywords from table and memory
+		2. Using the rel score... to dynamically Highlight table row in gradient of yellow
+		3. Add Splash Screen to explain how to use this tool
+		4. Should we disable findlongtail button after initial search?
+		*/
+		
+
+		// $(document).ready( function () {
+		// 	$('#list-of-keywords').DataTable();
+		// });
 
 		/*without jQuery (doesn't work in older IEs)*/
 		var past_keywords = [];
