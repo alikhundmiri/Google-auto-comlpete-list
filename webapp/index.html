@@ -101,10 +101,28 @@
 	<script>
 		tinymce.init({
 			selector: '.article-editor',
-			placeholder: `Begin by entering a seed keyword and click 'add' for relatable keywords.`
+			menubar: false,
+			placeholder: `Begin by entering a seed keyword and click 'add' for relatable keywords.`,
+			plugins: [
+			'advlist autolink lists link image charmap print preview anchor',
+			'searchreplace visualblocks code fullscreen',
+			'insertdatetime media table paste code help wordcount'
+			],
+			toolbar: 'undo redo | formatselect | ' +
+			'bold italic backcolor | alignleft aligncenter ' +
+			'alignright alignjustify | bullist numlist outdent indent | ' +
+			'removeformat | help',
 		});
 	</script>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-98290233-2"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
 
+		gtag('config', 'UA-98290233-2');
+	</script>
 </head>
 <body>
 	<div class="cover-container d-flex p-3 mx-auto flex-column">
