@@ -7,6 +7,9 @@
 
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
 
 	<!-- Primary Meta Tags -->
 	<title>Keyword Auto generator</title>
@@ -125,14 +128,26 @@
 
 						<div class="row">
 							<form id="keyword-form">
-								<input id="id_keyword" type="text" name="keyword" placeholder="Enter Seed Keyword">
+								<input id="id_keyword" type="text" name="keyword" value='python vs javascript' placeholder="Enter Seed Keyword">
 								<button class="btn btn-primary" type="submit">Find Longtail</button>
 								<div id ="form_errors" style="color: red; font-size: 1rem"></div>
 
 							</form>
 						</div>
-						<div class="row" id="list-of-keywords">
+						<div class="row">
 							
+							<table class="table table-borderless" id="list-of-keywords">
+								<thead>
+									<tr>
+										<th scope="col">rel</th>
+										<th scope="col">Keyword</th>
+										<th scope="col"></th>
+									</tr>
+								</thead>
+								<tbody id="list-of-keywords-body">
+									
+								</tbody>
+							</table>
 						</div>
 					</div>
 					<div class="col-9 textarea-col">
@@ -157,10 +172,14 @@
 
 	<!-- The MVP -->
 	<script type="text/javascript">
-		
+		$(document).ready( function () {
+			$('#list-of-keywords').DataTable();
+		});
 
 		/*without jQuery (doesn't work in older IEs)*/
 		var past_keywords = [];
+
+		// BEGIN KEYWORD GENERATOR SCRIPT
 		function startKeywordFinder(event) {
 
 			/*get the keyword from text field*/
@@ -175,12 +194,11 @@
 				const longsearch = false;
 				var i;
 
-				// testing
+				// GET ALL ALPHABETS, A TO Z,
 				for (var i = 97; i < 123; i++) {
+					// SEND IT TO KEYWORD COMBINER
 					keyword_combiner(i, base_keyword, longsearch);
 				};
-				// end testing
-				// send_api_request(base_keyword)
 				// console.log("Finish");
 			};
 			// console.log("past_keywords: " + past_keywords)
@@ -189,7 +207,7 @@
 			event.preventDefault();
 		};
 
-
+		// CREATE NEW KEYWORD BY ADDING ALPHABET IN FRONT AND END
 		function keyword_combiner(i, base_keyword, longsearch) {
 			send_api_request(base_keyword + " " + String.fromCharCode(i));
 			send_api_request(String.fromCharCode(i) + " " + base_keyword);
@@ -200,6 +218,7 @@
 			}
 		}
 
+		// SEND API REQUEST
 		function send_api_request(keyword) {
 			// set the base URL
 			let base_url = 'https://suggestqueries.google.com/complete/search?';
@@ -218,27 +237,40 @@
 				},
 				success: function(jsondata){
 					console.log(jsondata)
-					$.each(jsondata[1], function(key, value) {
-						// console.log(value)
-						createNewEntry(value);
-					})
+					
+					for (var i = 0; i < jsondata[1].length; i++) {
+						// jsondata[1][i]
+						let found_keyword_rel = (jsondata[4]['google:suggestrelevance'][i]);
+						let found_keyword = (jsondata[1][i]);
+						createNewEntry(found_keyword_rel, found_keyword);
+
+					}
 					// Add here to catch on fail
 				},
 			});
 
 		}
 
-		function createNewEntry(keyword){
+		// CREATE NEW TABLE ROW
+		function createNewEntry(rel, keyword){
 			/*Create a <div> node*/
-			var node = document.createElement("div");
-			node.setAttribute('class','keyword-div col-12');
+			var node = document.createElement("tr");
+			// node.setAttribute('class','keyword-div col-12');
 
 			// add an innerHTML to the node
-			node.innerHTML = `<p style="float: left">${keyword}</p> 
+			node.innerHTML = `
+			<td><p style='color:grey'>${rel}</p></td>
+			<td><p style="float: left">${keyword}</p></td>
+			<td><a style="float: right" value='${keyword}' onclick="return addH2(this)" href="">Add</a></td>
+			`;
+			
+			/*
+			node.innerHTML = `<p style='color:grey'>${rel}</p><p style="float: left">${keyword}</p> 
 			<a style="float: right" value='${keyword}' onclick="return addH2(this)" href="">Add</a>`;
+			*/
 
 			/* Append this node with the list: id="list-of-keywords" */
-			document.getElementById("list-of-keywords").appendChild(node);
+			document.getElementById("list-of-keywords-body").appendChild(node);
 		}
 		// Chekc for form submit. and initiate StartKeywordFinder
 		const form = document.getElementById('keyword-form')
